@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 5px;
+            background: url('template/back.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        h1 {
+            text-align: center;
+            color: #14dc96;
+            margin-bottom: 2rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(91, 130, 123, 0.9);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        input, select {
+            width: 80%;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .prediction{
+            font-size: 18px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 0.9rem;
+        }
+        #btn-predict {
+            background-color: #14dc96;
+            padding: 0.7rem 3rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        #btn-predict:hover {
+            background-color: #24ac7d;
+        }
+
+        #result {
+            color: #14dc96;
+            background-color: white;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 30px;
+            }
+
+            form {
+                width: 90%;
+                padding: 15px;
+            }
+
+            input, select, button {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Mobile Price Prediction</h1>
+    <form id="predictionForm">
+        <input type="number" step="0.01" placeholder="Battery Power (mAh)" name="battery_power" required>
+        <input type="number" placeholder="RAM (GB)" name="ram" required>
+        <input type="number" placeholder="Internal Storage (GB)" name="int_memory" required>
+        <input type="number" step="0.01" placeholder="Screen Size (inches)" name="mobile_wt" required>
+        <input type="number" step="0.01" placeholder="Processor Speed (GHz)" name="processor_speed" required>
+        <input type="number" placeholder="Front Camera (MP)" name="fc" required>
+        <input type="number" placeholder="Primary Camera (MP)" name="pc" required>
+        <input type="number" placeholder="Number of Cores" name="n_cores" required>
+        <input type="number" placeholder="Talk Time (hrs)" name="talk_time" required>
+        <select name="brand" required>
+            <option value="">Select Brand</option>
+            <option value="samsung">Samsung</option>
+            <option value="apple">Apple</option>
+            <option value="oneplus">OnePlus</option>
+            <option value="huawei">Huawei</option>
+            <option value="tecno">Tecno</option>
+            <option value="itel">Itel</option>
+        </select>
+        <select name="os" required>
+            <option value="">Select Operating System</option>
+            <option value="android">Android</option>
+            <option value="ios">iOS</option>
+        </select>
+        <select name="touch_screen" required>
+            <option value="">Supports Touch Screen?</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+        <select name="wifi" required>
+            <option value="">Supports WiFi?</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+        <select name="three_g" required>
+            <option value="">Supports 3G?</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+        <select name="four_g" required>
+            <option value="">Supports 4G?</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+        <select name="dual_sim" required>
+            <option value="">Supports Dual Sim?</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+        <button type="submit" id="btn-predict" class="prediction">Predict Price</button>
+        <span id="result" class="prediction"></span>
+    </form>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            let data = Object.fromEntries(formData.entries());
+
+            // Convert numeric fields to proper types
+            for (let key in data) {
+                if (!isNaN(data[key])) {
+                    data[key] = parseFloat(data[key]); 
+                }
+            }
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+                const resultArea = document.getElementById('result');
+                if (response.ok) {
+                resultArea.innerText = `Predicted Price: $${result.predicted_price}`;
+                resultArea.style.padding = ".7rem";
+                } else {
+                    resultArea.innerText = `Error: ${result.error}`;
+                }
+            } catch (error) {
+                resultArea.innerText = `Error connecting to API`;
+            }
+        });
+    </script>
+</body>
+</html>
