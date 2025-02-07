@@ -16,7 +16,7 @@ app = FastAPI()
 # Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Adjust this to your frontend's origin for production
+    allow_origins=["https://machine-learning1-vmkd.onrender.com"],  # Adjust this to your frontend's origin for production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
