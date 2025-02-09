@@ -29,7 +29,7 @@ app.mount("/template", StaticFiles(directory="template"), name="template")
 
 
 class HouseData(BaseModel):
-    battery_power: float
+    battery_power: int
     ram: int
     int_memory: int
     mobile_wt: float

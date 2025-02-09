@@ -6,10 +6,10 @@
     <title>Mobile Price Prediction</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 5px;
-            background: url('template/back.jpg') no-repeat center center;
+            background: url('/template/b.avif') center center no-repeat;
             background-size: cover;
+            background-attachment: fixed;
         }
 
         h1 {
@@ -80,7 +80,7 @@
 <body>
     <h1>Mobile Price Prediction</h1>
     <form id="predictionForm">
-        <input type="number" step="0.01" placeholder="Battery Power (mAh)" name="battery_power" required>
+        <input type="number" placeholder="Battery Power (mAh)" name="battery_power" required>
         <input type="number" placeholder="RAM (GB)" name="ram" required>
         <input type="number" placeholder="Internal Storage (GB)" name="int_memory" required>
         <input type="number" step="0.01" placeholder="Screen Size (inches)" name="mobile_wt" required>
@@ -91,12 +91,16 @@
         <input type="number" placeholder="Talk Time (hrs)" name="talk_time" required>
         <select name="brand" required>
             <option value="">Select Brand</option>
-            <option value="samsung">Samsung</option>
-            <option value="apple">Apple</option>
-            <option value="oneplus">OnePlus</option>
             <option value="huawei">Huawei</option>
+            <option value="samsung">Samsung</option>
+            <option value="xiaomi">Xiaomi</option>
+            <option value="realme">Realme</option>
+            <option value="motorola">Motorola</option>
+            <option value="oneplus">OnePlus</option>
+            <option value="vivo">Vivo</option>
+            <option value="apple">Apple</option>
             <option value="tecno">Tecno</option>
-            <option value="itel">Itel</option>
+            <option value="oppo">Oppo</option>
         </select>
         <select name="os" required>
             <option value="">Select Operating System</option>
@@ -130,8 +134,6 @@
         </select>
         <button type="submit" id="btn-predict" class="prediction">Predict Price</button>
         <span id="result" class="prediction"></span>
-        <!-- https://machine-learning1-719x.onrender.com/predict -->
-        <!-- http://127.0.0.1:8000/predict -->
     </form>
 
     <script>
