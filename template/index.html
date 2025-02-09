@@ -83,7 +83,7 @@
         <input type="number" placeholder="Battery Power (mAh)" name="battery_power" required>
         <input type="number" placeholder="RAM (GB)" name="ram" required>
         <input type="number" placeholder="Internal Storage (GB)" name="int_memory" required>
-        <input type="number" step="0.01" placeholder="Screen Size (inches)" name="mobile_wt" required>
+        <input type="number" step="0.01" placeholder="Mobile Weight (grams)" name="mobile_wt" required>
         <input type="number" step="0.01" placeholder="Processor Speed (GHz)" name="processor_speed" required>
         <input type="number" placeholder="Front Camera (MP)" name="fc" required>
         <input type="number" placeholder="Primary Camera (MP)" name="pc" required>
@@ -148,6 +148,10 @@
                     data[key] = parseFloat(data[key]); 
                 }
             }
+
+            // Convert RAM and Internal Memory from GB to MB
+            data.ram = data.ram * 1024;
+            data.int_memory = data.int_memory * 1024;
 
             try {
                 const response = await fetch('https://machine-learning1-719x.onrender.com/predict', {
