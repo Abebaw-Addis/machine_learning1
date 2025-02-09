@@ -7,8 +7,8 @@ Installation
 To run this API locally, follow the steps below:
 
 1. Clone the repository:
-    git clone https://github.com/your-repo/mobile-price-prediction-api.git
-    cd mobile-price-prediction-api
+    git clone https://github.com/Abebaw-Addis/machine_learning1.git
+    cd project
 
 2. Set up a virtual environment (optional but recommended):
     python3 -m venv venv
@@ -16,7 +16,7 @@ To run this API locally, follow the steps below:
 3. Install dependencies:
     pip install -r requirements.txt
 4. Run the FastAPI application:
-    uvicorn fastapi_app:app --reload
+    uvicorn api:app --reload
 The app will be available at http://127.0.0.1:8000.
 
 API Usage
@@ -39,7 +39,7 @@ Once tested locally, you can deploy the FastAPI application on a cloud platform 
 For example, on Render:
 
 Create a new "Web Service" and connect to your GitHub repository.
-Set the build command to pip install -r requirements.txt and the start command to uvicorn fastapi_app:app --host 0.0.0.0 --port 80.
+Set the build command to pip install -r requirements.txt and the start command to uvicorn api:app --host 0.0.0.0 --port 80.
 
 Future Improvements
 Model Improvement: Experiment with other models (e.g., XGBoost, LightGBM) and compare performance.
