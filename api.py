@@ -16,7 +16,8 @@ app = FastAPI()
 # Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://machine-learning1-719x.onrender.com"],  # Adjust this to your frontend's origin for production
+     # Adjust this to your frontend's origin for production
+    allow_origins=["https://machine-learning1-719x.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -29,14 +30,14 @@ app.mount("/template", StaticFiles(directory="template"), name="template")
 
 class HouseData(BaseModel):
     battery_power: float
-    ram: float
-    int_memory: float
+    ram: int
+    int_memory: int
     mobile_wt: float
     processor_speed: float
     fc: int
     pc: int
     n_cores: int
-    talk_time: int
+    talk_time: float
     brand: str
     os: str
     touch_screen: int
