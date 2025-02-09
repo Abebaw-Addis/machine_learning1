@@ -41,6 +41,9 @@ For example, on Render:
 Create a new "Web Service" and connect to your GitHub repository.
 Set the build command to pip install -r requirements.txt and the start command to uvicorn api:app --host 0.0.0.0 --port 80.
 
+Model is deployed on render go and visit it https://machine-learning1-719x.onrender.com/
+
+
 Future Improvements
 Model Improvement: Experiment with other models (e.g., XGBoost, LightGBM) and compare performance.
 Input Validation: Enhance input validation to handle edge cases and provide better error messages.
