@@ -28,8 +28,8 @@ app.add_middleware(
 app.mount("/template", StaticFiles(directory="template"), name="template")
 
 
-class HouseData(BaseModel):
-    battery_power: int
+class MobileData(BaseModel):
+    battery_power: float
     ram: int
     int_memory: int
     mobile_wt: float
@@ -47,7 +47,7 @@ class HouseData(BaseModel):
     dual_sim: int
 
 @app.post("/predict")
-def predict_price(data: HouseData):
+def predict_price(data: MobileData):
     try:
         # Convert input data to DataFrame
         input_data = pd.DataFrame([data.model_dump()])
